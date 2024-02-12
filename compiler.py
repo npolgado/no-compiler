@@ -14,14 +14,12 @@ class Compiler:
     def __init__(self, path, DEBUG=False):
         self.db = DEBUG
         self.filepath = path
-        self.tokens = []
         self.tokens = self.tokenize()
         self.ast = self.parse()
 
     def pd(self, msg:str, space:bool=False, end:str="\n"):
-
-        # get function that called this method
-        caller = sys._getframe(1).f_code.co_name
+        caller = str(sys._getframe(1).f_code.co_name).upper()
+        
         if self.db:
             print(f"[{caller}]: {msg}")
             if space:
